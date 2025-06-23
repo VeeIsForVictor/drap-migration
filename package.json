@@ -1,0 +1,24 @@
+{
+  "name": "migration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.1",
+  "dependencies": {
+    "drizzle-orm": "^0.44.2",
+    "itertools": "^2.4.1",
+    "pg": "^8.16.2",
+    "pino": "^9.7.0",
+    "valibot": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.4",
+    "drizzle-kit": "^0.31.1"
+  }
+}
