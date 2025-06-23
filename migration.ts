@@ -2,7 +2,6 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import * as oldSchema from './old/schema'
 import * as newSchema from './new'
 import { and, eq } from 'drizzle-orm';
-import { lab, facultyChoiceUser } from './old/app';
 
 const OLD_DB_URI = "";
 const NEW_DB_URI = "";
