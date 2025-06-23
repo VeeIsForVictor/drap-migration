@@ -76,8 +76,7 @@ for (const { draftId, createdAt, email, labs } of oldStudentRanks) {
                     draftId,
                     userId,
                     index: BigInt(index),
-                    labId: `${lab}`,
-                    remark: `Created at ${createdAt}`
+                    labId: `${lab}`
                 })
                 .onConflictDoNothing();
         }
