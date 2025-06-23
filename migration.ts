@@ -89,12 +89,14 @@ const oldFacultyChoice = await oldDB
     .select()
     .from(oldSchema.facultyChoices);
 for (const { createdAt, round, labId, draftId, facultyEmail } of oldFacultyChoice) {
-    if (facultyEmail == null) continue;
     await newDB.transaction(async (txn) => {
-        const [{ userId: facultyUserId }] = await txn
-            .select({ userId: newSchema.user.id })
-            .from(newSchema.user)
-            .where(eq(newSchema.user.email, facultyEmail))
+        let facultyUserId: string | null = null;
+        if (facultyEmail !== null) {
+            [{ userId: facultyUserId }] = await txn
+                .select({ userId: newSchema.user.id })
+                .from(newSchema.user)
+                .where(eq(newSchema.user.email, facultyEmail))
+        }
         await txn
             .insert(newSchema.facultyChoice)
             .values({
@@ -105,6 +107,7 @@ for (const { createdAt, round, labId, draftId, facultyEmail } of oldFacultyChoic
                 userId: facultyUserId
             })
             .onConflictDoNothing();
+        if (facultyUserId === null) return;
         const studentEmailsList = await txn
             .select({ studentEmails: oldSchema.facultyChoicesEmailsInDrap.studentEmail })
             .from(oldSchema.facultyChoicesEmailsInDrap)
